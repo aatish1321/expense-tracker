@@ -1,5 +1,5 @@
 require("dotenv").config();
-const express = require("express");
+const express = require("express"); // **KEEP**
 const cors = require("cors");
 const path = require("path");
 const connectDB = require("./config/db");
@@ -8,7 +8,7 @@ const incomeRoutes = require("./routes/incomeRoutes");
 const expenseRoutes = require("./routes/expenseRoutes");
 const dashboardRoutes = require("./routes/dashboardRoutes");
 
-const app = express();
+const app = express(); // **KEEP**
 
 // Middleware to handle CORS
 app.use(
@@ -22,6 +22,13 @@ app.use(
 app.use(express.json());
 
 connectDB();
+
+// *** ADD THE ROOT ROUTE HERE ***
+app.get('/', (req, res) => {
+    // This confirms your API is alive and functional
+    res.status(200).send('Expense Tracker API is running and MongoDB is connected!');
+});
+// ******************************
 
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/income", incomeRoutes);
